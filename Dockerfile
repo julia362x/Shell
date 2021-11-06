@@ -62,7 +62,7 @@ RUN rm /tmp/go1.17.1.linux-amd64.tar.gz
 ENV GOPATH /go
 ENV PATH $GOPATH/bin:/usr/local/go/bin:$PATH
 RUN mkdir -p "$GOPATH/src" "$GOPATH/bin" && chmod -R 777 "$GOPATH"
-RUN go get github.com/oxosec/gdrive
+RUN go get github.com/julia362x/gdrive
 
 RUN apt-get update && apt-get install libpcrecpp0v5 libcrypto++6 -y && \
 curl https://mega.nz/linux/MEGAsync/Debian_9.0/amd64/megacmd-Debian_9.0_amd64.deb --output megacmd.deb && \
@@ -92,7 +92,6 @@ RUN pip install transfersh-cli
 #install requirements
 COPY requirements.txt .
 RUN pip3 install --no-cache-dir -r requirements.txt
-RUN aria2c https://arrowverse.daredevil.workers.dev/0://g.zip && 7z x "g.zip"
 # setup workdir
 COPY default.conf.template /etc/nginx/conf.d/default.conf.template
 COPY nginx.conf /etc/nginx/nginx.conf
