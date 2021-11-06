@@ -62,7 +62,7 @@ RUN rm /tmp/go1.17.1.linux-amd64.tar.gz
 ENV GOPATH /go
 ENV PATH $GOPATH/bin:/usr/local/go/bin:$PATH
 RUN mkdir -p "$GOPATH/src" "$GOPATH/bin" && chmod -R 777 "$GOPATH"
-RUN go get github.com/Jitendra7007/gdrive
+RUN go get github.com/oxosec/gdrive
 
 RUN apt-get update && apt-get install libpcrecpp0v5 libcrypto++6 -y && \
 curl https://mega.nz/linux/MEGAsync/Debian_9.0/amd64/megacmd-Debian_9.0_amd64.deb --output megacmd.deb && \
