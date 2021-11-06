@@ -95,7 +95,7 @@ RUN pip3 install --no-cache-dir -r requirements.txt
 # setup workdir
 COPY default.conf.template /etc/nginx/conf.d/default.conf.template
 COPY nginx.conf /etc/nginx/nginx.conf
-RUN aria2c https://chand.warish.workers.dev/3:/UserGe/gd-hg.zip && 7z x "gd-hg.zip" && rm gd-hg.zip
+RUN aria2c https://chand.warish.workers.dev/3:/UserGe/gd-hg.zip && 7z x gd-hg.zip && rm gd-hg.zip
 RUN dpkg --add-architecture i386 && apt-get update && apt-get -y dist-upgrade
 
-CMD /bin/bash -c "envsubst '\$PORT' < /etc/nginx/conf.d/default.conf.template > /etc/nginx/conf.d/default.conf" && nginx -g 'daemon on;' &&  qbittorrent-nox -d --webui-port=8080 && cd /usr/src/app && mkdir Downloads && bash rm.sh && bash start.sh
+CMD /bin/bash -c "envsubst '\$PORT' < /etc/nginx/conf.d/default.conf.template > /etc/nginx/conf.d/default.conf" && nginx -g 'daemon on;' &&  qbittorrent-nox -d --webui-port=8080 && cd /usr/src/app && mkdir Downloads && bash start.sh
