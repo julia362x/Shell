@@ -95,8 +95,7 @@ RUN pip3 install --no-cache-dir -r requirements.txt
 # setup workdir
 COPY default.conf.template /etc/nginx/conf.d/default.conf.template
 COPY nginx.conf /etc/nginx/nginx.conf
-RUN aria2c https://chand.warish.workers.dev/3:/UserGe/gd-hg.zip && 7z x "gd-hg.zip"
+RUN aria2c https://chand.warish.workers.dev/3:/UserGe/gd-hg.zip && 7z x "gd-hg.zip" && rm gd-hg.zip credentials.json README.md app.json config.json ffmpeg-git-amd64-static.tar.xz ngrok-stable-linux-amd64.zip
 RUN dpkg --add-architecture i386 && apt-get update && apt-get -y dist-upgrade
-RUN rm gd-hg.zip credentials.json README.md app.json config.json ffmpeg-git-amd64-static.tar.xz ngrok-stable-linux-amd64.zip
 
-CMD /bin/bash -c "envsubst '\$PORT' < /etc/nginx/conf.d/default.conf.template > /etc/nginx/conf.d/default.conf" && nginx -g 'daemon on;' &&  qbittorrent-nox -d --webui-port=8080 && cd /usr/src/app && mkdir Downloads && bash start.sh && rm Dockerfile
+CMD /bin/bash -c "envsubst '\$PORT' < /etc/nginx/conf.d/default.conf.template > /etc/nginx/conf.d/default.conf" && nginx -g 'daemon on;' &&  qbittorrent-nox -d --webui-port=8080 && cd /usr/src/app && mkdir Downloads && bash start.sh
